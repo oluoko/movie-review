@@ -1,5 +1,7 @@
 package dev.scene_it_all.movie_review;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Movie {
     @Id
+    @JsonSerialize(using = CustomObjectIdSerializer.class)
+    @JsonDeserialize(using = CustomObjectIdDeserializer.class)
     private ObjectId id;
     private String imdbId;
     private String title;
@@ -26,4 +30,14 @@ public class Movie {
     private List<String> backdrops;
     @DocumentReference
     private List<Review> reviewIds;
+
+    public Movie(String imdbId, String title, String releaseDate, String trailerLink, String poster, List<String> genres, List<String> backdrops) {
+        this.imdbId = imdbId;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.trailerLink = trailerLink;
+        this.poster = poster;
+        this.genres = genres;
+        this.backdrops = backdrops;
+    }
 }
