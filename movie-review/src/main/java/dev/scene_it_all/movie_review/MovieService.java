@@ -1,6 +1,5 @@
 package dev.scene_it_all.movie_review;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

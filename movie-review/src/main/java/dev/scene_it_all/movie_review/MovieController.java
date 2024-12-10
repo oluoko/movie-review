@@ -19,8 +19,11 @@ public class MovieController {
     private MovieService movieService;
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
-        return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK);
+        List<Movie> movies = movieService.allMovies();
+        movies.forEach(movie -> System.out.println("Movie: " + movie));
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
+
 
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId) {
